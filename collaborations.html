@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kousins - Kollaborations</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* Navigation Styles */
+        .navbar {
+            background-color: #121212; /* Darker black for navbar */
+            color: white;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 15px 0;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin: 0;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: #333333; /* Dark gray for hover */
+        }
+
+        .nav-link.active {
+            background-color: #333333; /* Dark gray for active */
+            font-weight: bold;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 15px 0;
+        }
+        
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: white;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background-color: #121212;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 0;
+                width: 100%;
+                border-bottom: 1px solid #333333;
+            }
+            
+            .nav-link {
+                padding: 15px;
+            }
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        /* Kollaborations Specific Styles */
+        .collab-header {
+            text-align: center;
+            color: #121212; /* Black header */
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+        
+        .collab-intro {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        /* Grid Layout for Collaborations */
+        .collab-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .collab-item {
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .collab-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .collab-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .collab-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .collab-title {
+            color: #121212;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        .collab-text {
+            font-size: 1rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        
+        .collab-link {
+            display: inline-block;
+            color: #121212;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: auto;
+            word-break: break-all;
+            transition: color 0.3s;
+        }
+        
+        .collab-link:hover {
+            color: #666;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .collab-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .collab-header {
+                font-size: 2rem;
+            }
+            
+            .collab-intro {
+                font-size: 1rem;
+            }
+            
+            .collab-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">The Kousins</div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">Index</a></li>
+                <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li class="nav-item"><a href="collaborations.html" class="nav-link active">Kollaborations</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Kontact Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h1 class="collab-header">KOLLABORATIONS</h1>
+            
+            <p class="collab-intro">
+                Explore our partnerships and collaborative projects with various institutions and organizations.
+            </p>
+            
+            <!-- First row of collaborations -->
+            <div class="collab-grid">
+                <div class="collab-item">
+                    <img src="images/collab_sandberg.png" alt="Sandberg Instituut" class="collab-image">
+                    <div class="collab-content">
+                        <h2 class="collab-title">Sandberg Instituut</h2>
+                        <p class="collab-text">
+                            Decolonial Futures 2017 - 2022
+                        </p>
+                        <a href="https://sandberg.nl/decolonial-futures" target="_blank" class="collab-link">
+                            <i class="fas fa-external-link-alt"></i> sandberg.nl/decolonial-futures
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="collab-item">
+                    <img src="images/collab_framerframed.png" alt="Framer Framed" class="collab-image">
+                    <div class="collab-content">
+                        <h2 class="collab-title">Framer Framed</h2>
+                        <p class="collab-text">
+                            Decolonial Futures
+                        </p>
+                        <a href="https://framerframed.nl/en/community-learning/decolonial-futures/" target="_blank" class="collab-link">
+                            <i class="fas fa-external-link-alt"></i> framerframed.nl/en/community-learning/decolonial-futures/
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second row of collaborations -->
+            <div class="collab-grid">
+                <div class="collab-item">
+                    <img src="images/collab_thamimnyele.png" alt="Thami Mnyele Foundation Award" class="collab-image">
+                    <div class="collab-content">
+                        <h2 class="collab-title">Thami Mnyele Foundation Award</h2>
+                        <p class="collab-text">
+                            Recognition for outstanding contributions in the field
+                        </p>
+                        <a href="https://thami-mnyele.nl/News/2020/398.php" target="_blank" class="collab-link">
+                            <i class="fas fa-external-link-alt"></i> thami-mnyele.nl/News/2020/398.php
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="collab-item">
+                    <img src="images/collab_unlikely.png" alt="Unlikely" class="collab-image">
+                    <div class="collab-content">
+                        <h2 class="collab-title">Unlikely</h2>
+                        <p class="collab-text">
+                            The Space that is Us: Resisting and Recreating Selves and Spaces
+                        </p>
+                        <a href="https://unlikely.net.au/issue-09/the-space-that-is-us" target="_blank" class="collab-link">
+                            <i class="fas fa-external-link-alt"></i> unlikely.net.au/issue-09/the-space-that-is-us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector(".hamburger");
+            const navMenu = document.querySelector(".nav-menu");
+            
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+            });
+            
+            document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            }));
+        });
+    </script>
+</body>
+</html>

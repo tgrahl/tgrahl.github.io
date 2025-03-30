@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kousins - About Us</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* Navigation Styles */
+        .navbar {
+            background-color: #121212; /* Darker black for navbar */
+            color: white;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 15px 0;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin: 0;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: #333333; /* Dark gray for hover */
+        }
+
+        .nav-link.active {
+            background-color: #333333; /* Dark gray for active */
+            font-weight: bold;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 15px 0;
+        }
+        
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: white;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background-color: #2d3748;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 0;
+                width: 100%;
+                border-bottom: 1px solid #4a5568;
+            }
+            
+            .nav-link {
+                padding: 15px;
+            }
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        /* About Us Specific Styles */
+        .about-header {
+            text-align: center;
+            color: #b91c1c; /* Red-700 */
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+        
+        .about-intro {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        .logo-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .logo-container {
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+        }
+        
+        .logo-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+        
+        .values-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .value-column {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+        
+        .value-title {
+            color: #b91c1c; /* Red-700 */
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .value-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 768px) {
+            .logo-section, .values-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .logo-container, .value-column {
+                max-width: 100%;
+            }
+            
+            .about-header {
+                font-size: 2rem;
+            }
+            
+            .about-intro {
+                font-size: 1rem;
+            }
+            
+            .value-title {
+                font-size: 1.5rem;
+            }
+            
+            .value-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">The Kousins</div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link active">About Us</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">Index</a></li>
+                <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li class="nav-item"><a href="collaborations.html" class="nav-link">Kollaborations</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Kontact Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h1 class="about-header">ABOUT US</h1>
+            
+            <p class="about-intro">
+                The notion of Kousins suggests familial kinship rather than superficial connections and is counterposed with the more conventional formulation of 'friends of the arts' who typically provide financial support to museums or galleries and form elite inner circles of art patrons. Kousins suggests a move beyond a disconnected transactional engagement to a more active engagement that is deeply invested in the project's success.
+            </p>
+            
+            <div class="logo-section">
+                <div class="logo-container">
+                    <img src="images/about_vision.png" alt="" class="logo-image">
+                </div>
+                <div class="logo-container">
+                    <img src="images/about_mission.png" alt="" class="logo-image">
+                </div>
+                <div class="logo-container">
+                    <img src="images/about_principles.png" alt="Combined Logo" class="logo-image">
+                </div>
+            </div>
+            
+            <div class="values-section">
+                <div class="value-column">
+                    <h2 class="value-title">VISION</h2>
+                    <p class="value-text">
+                        TO BUILD A WORLDWIDE FUND FOR ARTS EDUCATION AND DEVELOPMENT IN PREVIOUSLY AND PRESENTLY DISADVANTAGED COMMUNITIES.
+                    </p>
+                </div>
+                
+                <div class="value-column">
+                    <h2 class="value-title">MISSION</h2>
+                    <p class="value-text">
+                        TO DEFINE, DESCRIBE, DOCUMENT, ARCHIVE AND BUILD A WORK-BASED PLATFORM FOR ARTS EDUCATION.
+                    </p>
+                </div>
+                
+                <div class="value-column">
+                    <h2 class="value-title">PRINCIPLES</h2>
+                    <p class="value-text">
+                        AN ARTIST HAS TO BE TRUE TO THEIR ENVIRONMENT
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector(".hamburger");
+            const navMenu = document.querySelector(".nav-menu");
+            
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+            });
+            
+            document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            }));
+        });
+    </script>
+</body>
+</html>

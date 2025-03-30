@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kousins - Gallery</title>
+    <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            
+            body {
+                background-color: #f5f5f5;
+                color: #333;
+                padding: 0;
+                margin: 0;
+            }
+            
+            /* Navigation Styles */
+            .navbar {
+                background-color: #121212; /* Darker black for navbar */
+                color: white;
+                padding: 0;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 20px;
+            }
+            
+            .nav-logo {
+                font-size: 1.5rem;
+                font-weight: bold;
+                padding: 15px 0;
+            }
+            
+            .nav-menu {
+                display: flex;
+                list-style: none;
+            }
+            
+            .nav-item {
+                margin: 0;
+            }
+            
+            .nav-link {
+                color: white;
+                text-decoration: none;
+                padding: 20px 15px;
+                display: block;
+                transition: background-color 0.3s;
+            }
+            
+            .nav-link:hover {
+                background-color: #333333; /* Dark gray for hover */
+            }
+    
+            .nav-link.active {
+                background-color: #333333; /* Dark gray for active */
+                font-weight: bold;
+            }
+            
+            .hamburger {
+                display: none;
+                cursor: pointer;
+                padding: 15px 0;
+            }
+            
+            .bar {
+                display: block;
+                width: 25px;
+                height: 3px;
+                margin: 5px auto;
+                background-color: white;
+                transition: all 0.3s ease-in-out;
+            }
+            
+            @media (max-width: 768px) {
+                .hamburger {
+                    display: block;
+                }
+                
+                .hamburger.active .bar:nth-child(2) {
+                    opacity: 0;
+                }
+                
+                .hamburger.active .bar:nth-child(1) {
+                    transform: translateY(8px) rotate(45deg);
+                }
+                
+                .hamburger.active .bar:nth-child(3) {
+                    transform: translateY(-8px) rotate(-45deg);
+                }
+                
+                .nav-menu {
+                    position: fixed;
+                    left: -100%;
+                    top: 60px;
+                    flex-direction: column;
+                    background-color: #121212; /* Darker black for mobile menu */
+                    width: 100%;
+                    text-align: center;
+                    transition: 0.3s;
+                    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+                }
+                
+                .nav-menu.active {
+                    left: 0;
+                }
+                
+                .nav-item {
+                    margin: 0;
+                    width: 100%;
+                    border-bottom: 1px solid #333333; /* Dark gray for borders */
+                }
+                
+                .nav-link {
+                    padding: 15px;
+                }
+            }
+            
+            /* Main Content Styles */
+            .main-content {
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+            }
+            
+            h1 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #121212; /* Black for headings */
+            }
+            
+            /* Gallery specific styles */
+            .intro-section {
+                text-align: center;
+                margin-bottom: 40px;
+                padding: 20px;
+                background-color: #f8f8f8; /* Light gray for intro section */
+                border-radius: 8px;
+            }
+            
+            .intro-section p {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: #333333; /* Dark gray for text */
+                max-width: 800px;
+                margin: 0 auto 20px;
+            }
+            
+            .contact-button {
+                display: inline-block;
+                background-color: #121212; /* Black for button */
+                color: white;
+                padding: 12px 24px;
+                border-radius: 4px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: background-color 0.3s;
+            }
+            
+            .contact-button:hover {
+                background-color: #333333; /* Dark gray for button hover */
+            }
+            
+            .gallery-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+                margin-top: 30px;
+            }
+            
+            .gallery-item {
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s, box-shadow 0.3s;
+                background-color: white;
+            }
+            
+            .gallery-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .gallery-image {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                display: block;
+                cursor: pointer;
+            }
+            
+            .gallery-content {
+                padding: 15px;
+            }
+            
+            .gallery-title {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+                color: #121212; /* Black for titles */
+            }
+            
+            .gallery-description {
+                color: #333333; /* Dark gray for descriptions */
+                line-height: 1.5;
+            }
+            
+            /* Modal styles for image enlargement */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 2000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.9);
+                padding: 20px;
+            }
+            
+            .modal-content {
+                display: block;
+                margin: 0 auto;
+                max-width: 90%;
+                max-height: 90vh;
+                object-fit: contain;
+            }
+            
+            .modal-caption {
+                color: white;
+                text-align: center;
+                padding: 15px 0;
+                max-width: 80%;
+                margin: 0 auto;
+            }
+            
+            .close {
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+            
+            /* Loading and error styles */
+            .loading {
+                text-align: center;
+                padding: 40px;
+                color: #333333; /* Dark gray for loading text */
+                font-size: 1.1rem;
+            }
+            
+            .error-message {
+                text-align: center;
+                padding: 20px;
+                color: #e53e3e; /* Keep red for errors */
+                background-color: #fff5f5;
+                border-radius: 4px;
+                margin-bottom: 20px;
+            }
+            
+            @media (max-width: 768px) {
+                .gallery-grid {
+                    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                    gap: 15px;
+                }
+                
+                .intro-section {
+                    padding: 15px;
+                }
+                
+                .intro-section p {
+                    font-size: 1rem;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .gallery-grid {
+                    grid-template-columns: 1fr;
+                }
+                
+                .gallery-image {
+                    height: 180px;
+                }
+                
+                .contact-button {
+                    padding: 10px 20px;
+                    font-size: 0.9rem;
+                }
+            }
+        </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">The Kousins</div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">Index</a></li>
+                <li class="nav-item"><a href="gallery.html" class="nav-link active">Gallery</a></li>
+                <li class="nav-item"><a href="collaborations.html" class="nav-link">Kollaborations</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Kontact Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h1>GALLERY</h1>
+            
+            <!-- Error container -->
+            <div id="errorContainer" class="error-message" style="display: none;"></div>
+            
+            <!-- Introduction Section -->
+            <div class="intro-section">
+                <p>Welcome to our gallery showcasing our work and achievements. If you're interested in any of these projects or would like more information, please contact us and we'll be happy to provide additional details.</p>
+                <a href="contact.html" class="contact-button">Contact Us <i class="fas fa-envelope"></i></a>
+            </div>
+            
+            <!-- Loading indicator -->
+            <div id="loadingIndicator" class="loading" style="display: none;">Loading gallery items...</div>
+            
+            <!-- Gallery Grid -->
+            <div id="galleryGrid" class="gallery-grid">
+                <!-- Gallery items will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for enlarged images -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="enlargedImage">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector(".hamburger");
+            const navMenu = document.querySelector(".nav-menu");
+            
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                navMenu.classList.toggle("active");
+            });
+            
+            document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            }));
+            
+            // Gallery functionality
+            const galleryGrid = document.getElementById('galleryGrid');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const errorContainer = document.getElementById('errorContainer');
+            
+            // Image modal functionality
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("enlargedImage");
+            const captionText = document.getElementById("modalCaption");
+            const closeBtn = document.getElementsByClassName("close")[0];
+            
+            // CSV URL - Update this variable with your actual Google Sheets CSV URL
+            const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQpgO1LHmtUquW__CUC_JJQAQ60jBvkgBjeueYrwjEeLCPtfVee0SK-dUFi5PeaKQpG1U3uQv641nV2/pub?gid=1027994568&single=true&output=csv";
+            
+            // Load gallery data from CSV
+            function loadGalleryData(url) {
+                // Clear previous gallery items and errors
+                galleryGrid.innerHTML = '';
+                errorContainer.style.display = 'none';
+                
+                // Show loading indicator
+                loadingIndicator.style.display = 'block';
+                
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch data. Make sure the Google Sheet is published and accessible.');
+                        }
+                        return response.text();
+                    })
+                    .then(csv => {
+                        parseGalleryCSV(csv);
+                        loadingIndicator.style.display = 'none';
+                    })
+                    .catch(error => {
+                        showError(error.message);
+                        loadingIndicator.style.display = 'none';
+                        
+                    });
+            }
+            
+            // Parse CSV data for gallery
+            function parseGalleryCSV(csv) {
+                const lines = csv.split('\n');
+                
+                if (lines.length < 2) {
+                    showError('The CSV file does not contain enough data');
+                    return;
+                }
+                
+                // Parse headers (first line)
+                const headerLine = lines[0];
+                const headers = parseCSVLine(headerLine);
+                
+                // Find column indices
+                const imageIndex = headers.findIndex(h => h.toLowerCase().includes('image'));
+                const nameIndex = headers.findIndex(h => h.toLowerCase().includes('name'));
+                const descIndex = headers.findIndex(h => h.toLowerCase().includes('description'));
+                
+                if (imageIndex === -1 || nameIndex === -1 || descIndex === -1) {
+                    showError('CSV must contain columns for Gallery Image, Gallery Name, and Gallery Description');
+                    return;
+                }
+                
+                // Parse data rows
+                for (let i = 1; i < lines.length; i++) {
+                    if (lines[i].trim() === '') continue;
+                    
+                    const rowData = parseCSVLine(lines[i]);
+                    if (rowData.length >= Math.max(imageIndex, nameIndex, descIndex) + 1) {
+                        const imageUrl = rowData[imageIndex].trim();
+                        const name = rowData[nameIndex].trim();
+                        const description = rowData[descIndex].trim();
+                        if (imageUrl && name) {
+                            createGalleryItem(imageUrl, name, description);
+                        }
+                    }
+                }
+                
+                // Set up modal functionality for new gallery items
+                setupModalFunctionality();
+            }
+            
+            // Parse a CSV line, handling quoted values with commas
+            function parseCSVLine(line) {
+                const result = [];
+                let current = '';
+                let inQuotes = false;
+                
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        result.push(current);
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                
+                // Add the last field
+                result.push(current);
+                
+                return result;
+            }
+            
+            // Create a gallery item
+            function createGalleryItem(imageUrl, title, description) {
+                // Create gallery item container
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                
+                // Create image element
+                const img = document.createElement('img');
+                img.className = 'gallery-image';
+                img.alt = title;
+                
+                img.src = imageUrl;
+                
+                // Handle image loading errors
+                img.onerror = function() {
+                    this.src = `https://source.unsplash.com/random/600x400/?${encodeURIComponent(title.toLowerCase())}`;
+                };
+                
+                // Create content container
+                const content = document.createElement('div');
+                content.className = 'gallery-content';
+                
+                // Create title
+                const titleElement = document.createElement('h3');
+                titleElement.className = 'gallery-title';
+                titleElement.textContent = title;
+                
+                // Create description
+                const descElement = document.createElement('p');
+                descElement.className = 'gallery-description';
+                descElement.textContent = description || 'No description available';
+                
+                // Assemble the gallery item
+                content.appendChild(titleElement);
+                content.appendChild(descElement);
+                galleryItem.appendChild(img);
+                galleryItem.appendChild(content);
+                
+                // Add to gallery grid
+                galleryGrid.appendChild(galleryItem);
+            }
+            
+            
+            // Set up modal functionality for gallery images
+            function setupModalFunctionality() {
+                // Get all gallery images
+                const galleryImages = document.querySelectorAll(".gallery-image");
+                
+                // Add click event to each gallery image
+                galleryImages.forEach(img => {
+                    img.addEventListener("click", function() {
+                        modal.style.display = "block";
+                        modalImg.src = this.src;
+                        
+                        // Get the title and description from the parent gallery item
+                        const galleryItem = this.closest(".gallery-item");
+                        const title = galleryItem.querySelector(".gallery-title").textContent;
+                        const description = galleryItem.querySelector(".gallery-description").textContent;
+                        
+                        captionText.innerHTML = `<strong>${title}</strong><br>${description}`;
+                    });
+                });
+            }
+            
+            // Close modal when clicking the × button
+            closeBtn.addEventListener("click", function() {
+                modal.style.display = "none";
+            });
+            
+            // Close modal when clicking outside the image
+            modal.addEventListener("click", function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "Escape" && modal.style.display === "block") {
+                    modal.style.display = "none";
+                }
+            });
+            
+            // Show error message
+            function showError(message) {
+                errorContainer.textContent = message;
+                errorContainer.style.display = 'block';
+            }
+            
+            // Load gallery data on page load
+            loadGalleryData(csvUrl);
+            
+            // Refresh gallery data every 5 minutes (300000 ms)
+            setInterval(() => {
+                loadGalleryData(csvUrl);
+            }, 300000);
+        });
+    </script>
+</body>
+</html>
