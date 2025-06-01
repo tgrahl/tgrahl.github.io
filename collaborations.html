@@ -16,8 +16,10 @@
         body {
             background-color: #f5f5f5;
             color: #333;
-            padding: 0;
             margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         
         /* Navigation Styles */
@@ -245,6 +247,34 @@
                 font-size: 1.3rem;
             }
         }
+        .site-footer {
+            background-color: #ffffff;
+            padding: 20px 10px 30px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #121212;
+            margin-top: auto;
+        }
+        
+        .footer-line {
+            border: none;
+            border-top: 2px solid #ccc;
+            margin: 0 auto 15px;
+            width: 90%;
+        }
+        
+        .footer-text a {
+            color: #121212;
+            text-decoration: underline;
+        }
+        
+        .footer-text a:hover {
+            color: #555;
+        }
+        
+        .page-content {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -257,7 +287,7 @@
                 <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
                 <li class="nav-item"><a href="index.html" class="nav-link">Index</a></li>
                 <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
-                <li class="nav-item"><a href="collaborations.html" class="nav-link active">Kollaborations</a></li>
+                <li class="nav-item"><a href="collaborations.html" class="nav-link active">Projects</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Kontact Us</a></li>
             </ul>
             <div class="hamburger">
@@ -269,73 +299,114 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="main-content">
+    <div class="main-content page-content">
         <div class="container">
-            <h1 class="collab-header">KOLLABORATIONS</h1>
+            <h1 class="collab-header">PROJECTS</h1>
             
             <p class="collab-intro">
-                Explore our partnerships and collaborative projects with various institutions and organizations.
+                Explore our collaborative projects with various institutions and organizations.
             </p>
             
             <!-- First row of collaborations -->
             <div class="collab-grid">
-                <div class="collab-item">
-                    <img src="images/collab_sandberg.png" alt="Sandberg Instituut" class="collab-image">
-                    <div class="collab-content">
-                        <h2 class="collab-title">Sandberg Instituut</h2>
-                        <p class="collab-text">
-                            Decolonial Futures 2017 - 2022
-                        </p>
-                        <a href="https://sandberg.nl/decolonial-futures" target="_blank" class="collab-link">
-                            <i class="fas fa-external-link-alt"></i> sandberg.nl/decolonial-futures
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="collab-item">
-                    <img src="images/collab_framerframed.png" alt="Framer Framed" class="collab-image">
-                    <div class="collab-content">
-                        <h2 class="collab-title">Framer Framed</h2>
-                        <p class="collab-text">
-                            Decolonial Futures
-                        </p>
-                        <a href="https://framerframed.nl/en/community-learning/decolonial-futures/" target="_blank" class="collab-link">
-                            <i class="fas fa-external-link-alt"></i> framerframed.nl/en/community-learning/decolonial-futures/
-                        </a>
-                    </div>
-                </div>
             </div>
 
-            <!-- Second row of collaborations -->
-            <div class="collab-grid">
-                <div class="collab-item">
-                    <img src="images/collab_thamimnyele.png" alt="Thami Mnyele Foundation Award" class="collab-image">
-                    <div class="collab-content">
-                        <h2 class="collab-title">Thami Mnyele Foundation Award</h2>
-                        <p class="collab-text">
-                            Recognition for outstanding contributions in the field
-                        </p>
-                        <a href="https://thami-mnyele.nl/News/2020/398.php" target="_blank" class="collab-link">
-                            <i class="fas fa-external-link-alt"></i> thami-mnyele.nl/News/2020/398.php
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="collab-item">
-                    <img src="images/collab_unlikely.png" alt="Unlikely" class="collab-image">
-                    <div class="collab-content">
-                        <h2 class="collab-title">Unlikely</h2>
-                        <p class="collab-text">
-                            The Space that is Us: Resisting and Recreating Selves and Spaces
-                        </p>
-                        <a href="https://unlikely.net.au/issue-09/the-space-that-is-us" target="_blank" class="collab-link">
-                            <i class="fas fa-external-link-alt"></i> unlikely.net.au/issue-09/the-space-that-is-us
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Parse a CSV line, handling quoted values with commas
+            function parseCSVLine(line) {
+                const result = [];
+                let current = '';
+                let inQuotes = false;
+                
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        result.push(current);
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                
+                // Add the last field
+                result.push(current);
+                
+                return result;
+            }
+
+            const gridContainer = document.querySelector('.container');
+    
+            // Replace with your own published CSV link to the "PROJECTS" tab
+            //const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQpgO1LHmtUquW__CUC_JJQAQ60jBvkgBjeueYrwjEeLCPtfVee0SK-dUFi5PeaKQpG1U3uQv641nV2/pub?gid=1075325289&single=true&output=csv";
+            const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQpgO1LHmtUquW__CUC_JJQAQ60jBvkgBjeueYrwjEeLCPtfVee0SK-dUFi5PeaKQpG1U3uQv641nV2/pub?gid=1075325289&single=true&output=csv";
+            fetch(sheetUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load project data.');
+                    }
+                    return response.text();
+                })
+                .then(csv => {
+                    const lines = csv.trim().split('\n');
+                    const headers = parseCSVLine(lines[0]);
+
+
+                    const nameIdx = headers.indexOf('Project Name');
+                    const descIdx = headers.indexOf('Project Description');
+                    const linkIdx = headers.indexOf('Project Link');
+                    const imgIdx = headers.indexOf('Project Image');
+    
+                    const rows = lines.slice(1).map(line => parseCSVLine(line));
+    
+                    // Clear static content
+                    document.querySelectorAll('.collab-grid').forEach(el => el.remove());
+    
+                    const collabGrid = document.createElement('div');
+                    collabGrid.className = 'collab-grid';
+    
+                    rows.forEach(row => {
+                        const title = row[nameIdx];
+                        const desc = row[descIdx];
+                        const link = row[linkIdx];
+                        const img = (imgIdx !== -1 && row[imgIdx]) ? row[imgIdx] : 'images/collab_placeholder.png';
+    
+                        const item = document.createElement('div');
+                        item.className = 'collab-item';
+    
+                        item.innerHTML = `
+                            <img src="${img}" alt="${title}" class="collab-image">
+                            <div class="collab-content">
+                                <h2 class="collab-title">${title}</h2>
+                                <p class="collab-text">${desc}</p>
+                        ${link ? `
+                            <a href="${link}" target="_blank" class="collab-link">
+                                <i class="fas fa-external-link-alt"></i> ${link}
+                            </a>` : ''}
+                            </div>
+                        `;
+    
+                        collabGrid.appendChild(item);
+                    });
+    
+                    gridContainer.appendChild(collabGrid);
+                })
+                .catch(error => {
+                    console.error(error);
+                    const errorMsg = document.createElement('p');
+                    errorMsg.className = 'collab-intro';
+                    errorMsg.textContent = 'Could not load project data. Please try again later.';
+                    gridContainer.appendChild(errorMsg);
+                });
+        });
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -354,5 +425,11 @@
             }));
         });
     </script>
+    <footer class="site-footer">
+        <hr class="footer-line">
+        <div class="footer-text">
+            Supported by <a href="https://framerframed.nl" target="_blank">Framer Framed</a>.
+        </div>
+    </footer>
 </body>
 </html>

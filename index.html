@@ -16,8 +16,10 @@
         body {
             background-color: #f5f5f5;
             color: #333;
-            padding: 0;
             margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         
         /* Navigation Styles */
@@ -400,7 +402,36 @@
                 max-width: 800px;
                 margin: 0 auto 20px;
             }
-    </style>
+            .site-footer {
+                background-color: #ffffff;
+                padding: 20px 10px 30px;
+                text-align: center;
+                font-size: 0.95rem;
+                color: #121212;
+                margin-top: auto;
+            }
+            
+            .footer-line {
+                border: none;
+                border-top: 2px solid #ccc;
+                margin: 0 auto 15px;
+                width: 90%;
+            }
+            
+            .footer-text a {
+                color: #121212;
+                text-decoration: underline;
+            }
+            
+            .footer-text a:hover {
+                color: #555;
+            }
+            
+    
+            .page-content {
+                flex: 1;
+            }
+        </style>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -412,7 +443,7 @@
                 <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
                 <li class="nav-item"><a href="index.html" class="nav-link active">Index</a></li>
                 <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
-                <li class="nav-item"><a href="collaborations.html" class="nav-link">Kollaborations</a></li>
+                <li class="nav-item"><a href="collaborations.html" class="nav-link">Projects</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Kontact Us</a></li>
             </ul>
             <div class="hamburger">
@@ -424,13 +455,13 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="main-content">
+    <div class="main-content page-content">
         <div class="container">
             <h1>INDEX</h1>
 
             <!-- Introduction Section -->
             <div class="intro-section">
-                <p>The Index is a growing record of the individuals who make up The Kousins—artists, educators, facilitators, and cultural workers whose contributions form the heart of this network. Over time, it will expand to include organisations, schools, galleries, museums, collaborators, and publications connected to the broader the Kousins ecosystem. More than a list, the Index is imagined as a cultural commons: a space that reflects the relationships, practices, and shared commitments that define this community, while inviting recognition, connection, and future collaboration.</p>
+                <p>The Kousins Index is a growing record of the individuals who make up The Kousins—artists, educators, facilitators, and cultural workers whose contributions form the heart of this network. Over time, it will expand to include organisations, schools, galleries, museums, collaborators, and publications connected to the broader Kousins ecosystem. More than a list, the Kousins Index is imagined as a cultural commons: a space that reflects the relationships, practices, and shared commitments that define this community while inviting recognition, connection, and future collaborations.</p>
             </div>
             
             <div id="errorContainer" class="error-message" style="display: none;"></div>
@@ -441,7 +472,7 @@
             
             <!-- Practice Filter -->
             <div class="filter-container" id="practiceFilterContainer">
-                <div class="filter-title">Filter by Practice</div>
+                <div class="filter-title">Filter by Kategory</div>
                 <div class="filter-tags" id="practiceFilterTags">
                     <!-- Filter tags will be dynamically generated -->
                     <div class="filter-tag all active">All</div>
@@ -609,7 +640,8 @@
                 
                 // Find the Practice column index - try multiple possible names
                 practiceColumnIndex = -1;
-                const possibleNames = ['practice', 'Practice', 'PRACTICE', 'practices', 'Practices'];
+                //const possibleNames = ['practice', 'Practice', 'PRACTICE', 'practices', 'Practices'];
+                const possibleNames = ['Kategory']; 
                 
                 for (const name of possibleNames) {
                     const index = headers.findIndex(header => header === name);
@@ -960,5 +992,11 @@
             }, 300000);
         });
     </script>
+    <footer class="site-footer">
+        <hr class="footer-line">
+        <div class="footer-text">
+            Supported by <a href="https://framerframed.nl" target="_blank">Framer Framed</a>.
+        </div>
+    </footer>
 </body>
 </html>

@@ -16,9 +16,12 @@
         body {
             background-color: #f5f5f5;
             color: #333;
-            padding: 0;
             margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
+        
         
         /* Navigation Styles */
         .navbar {
@@ -333,6 +336,37 @@
                 font-size: 1.3rem;
             }
         }
+
+
+        .site-footer {
+            background-color: #ffffff;
+            padding: 20px 10px 30px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #121212;
+            margin-top: auto;
+        }
+        
+        .footer-line {
+            border: none;
+            border-top: 2px solid #ccc;
+            margin: 0 auto 15px;
+            width: 90%;
+        }
+        
+        .footer-text a {
+            color: #121212;
+            text-decoration: underline;
+        }
+        
+        .footer-text a:hover {
+            color: #555;
+        }
+        
+
+        .page-content {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -345,7 +379,7 @@
                 <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
                 <li class="nav-item"><a href="index.html" class="nav-link">Index</a></li>
                 <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
-                <li class="nav-item"><a href="collaborations.html" class="nav-link">Kollaborations</a></li>
+                <li class="nav-item"><a href="collaborations.html" class="nav-link">Projects</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link active">Kontact Us</a></li>
             </ul>
             <div class="hamburger">
@@ -357,7 +391,7 @@
     </nav>
 
     <!-- Content Wrapper -->
-    <div class="content-wrapper">
+    <div class="content-wrapper page-content">
         <div class="container">
             <h1 class="page-title">KONTACT US</h1>
             <p class="page-subtitle">
@@ -373,7 +407,7 @@
             <div class="contact-layout">
                 <!-- Contact Form -->
                 <div class="contact-form">
-                    <form action="https://formsubmit.co/YOUR_EMAIL" method="POST" id="contactForm">
+                    <form action="https://formsubmit.co/collaborate@thekousins.org" method="POST" id="contactForm">
                         <!-- FormSubmit Configuration -->
                         <input type="hidden" name="_subject" value="New message from the Kousins website">
                         <input type="hidden" name="_captcha" value="false">
@@ -414,35 +448,7 @@
                         <div class="info-content">
                             <h3 class="info-label">Email Us</h3>
                             <p class="info-text">
-                                For general inquiries: <a href="mailto:info@kousins.com" class="info-link">info@kousins.com</a>
-                            </p>
-                            <p class="info-text">
-                                For collaboration proposals: <a href="mailto:collaborate@kousins.com" class="info-link">collaborate@kousins.com</a>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <i class="fab fa-whatsapp"></i>
-                        </div>
-                        <div class="info-content">
-                            <h3 class="info-label">WhatsApp</h3>
-                            <p class="info-text">
-                                For quick responses, message us on WhatsApp:
-                                <a href="https://wa.me/1234567890" class="info-link" target="_blank">+1 (234) 567-890</a>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="info-content">
-                            <h3 class="info-label">Response Time</h3>
-                            <p class="info-text">
-                                We typically respond to all inquiries within 24-48 hours during business days.
+                                Email: <a href="mailto:collaborate@thekousins.org" class="info-link">collaborate@thekousins.org</a>
                             </p>
                         </div>
                     </div>
@@ -490,5 +496,12 @@
             }
         });
     </script>
+
+    <footer class="site-footer">
+        <hr class="footer-line">
+        <div class="footer-text">
+            Supported by <a href="https://framerframed.nl" target="_blank">Framer Framed</a>.
+        </div>
+    </footer>
 </body>
 </html>

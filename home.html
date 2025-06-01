@@ -16,8 +16,10 @@
         body {
             background-color: #f5f5f5;
             color: #333;
-            padding: 0;
             margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         
         /* Navigation Styles */
@@ -283,6 +285,34 @@
                 height: 300px;
             }
         }
+        .site-footer {
+            background-color: #ffffff;
+            padding: 20px 10px 30px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #121212;
+            margin-top: auto;
+        }
+        
+        .footer-line {
+            border: none;
+            border-top: 2px solid #ccc;
+            margin: 0 auto 15px;
+            width: 90%;
+        }
+        
+        .footer-text a {
+            color: #121212;
+            text-decoration: underline;
+        }
+        
+        .footer-text a:hover {
+            color: #555;
+        }        
+
+        .page-content {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -295,7 +325,7 @@
                 <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
                 <li class="nav-item"><a href="index.html" class="nav-link">Index</a></li>
                 <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
-                <li class="nav-item"><a href="collaborations.html" class="nav-link">Kollaborations</a></li>
+                <li class="nav-item"><a href="collaborations.html" class="nav-link">Projects</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Kontact Us</a></li>
             </ul>
             <div class="hamburger">
@@ -307,7 +337,7 @@
     </nav>
 
     <!-- Content Wrapper to align hero and content sections -->
-    <div class="content-wrapper">
+    <div class="content-wrapper page-content">
         <!-- Hero Image (simplified without overlay or text) -->
         <div class="hero-image-container">
             <img src="images/HOME Image.png" alt="The Kousins Community" class="hero-image">
@@ -335,7 +365,11 @@
                     <h3 class="feature-title">Community</h3>
                     <p class="feature-text">
                         Join our diverse and inclusive community of individuals from various backgrounds, professions, and interests.
+                        Interested participants to become a participating artist, educator, or facilitator in the network. 
                     </p>
+                    <a class="cta-button" style="margin-top: 15px; display: inline-block;" href="https://docs.google.com/document/d/1xXgS3Y6_p4Kbpx5TcqOnCZcmoJEVjocc/edit?tab=t.0" target="_blank">
+                        Become a Kousin
+                    </a>
                 </div>
                 
                 <div class="feature-item">
@@ -345,7 +379,11 @@
                     <h3 class="feature-title">Collaboration</h3>
                     <p class="feature-text">
                         Discover opportunities to collaborate on projects, share resources, and create meaningful connections.
+                        Interested participants to become an investor, host, or collaborator in the network.
                     </p>
+                    <a class="cta-button" style="margin-top: 15px; display: inline-block;" href="https://docs.google.com/document/d/1496zN7iXmMGKMfKjg-iIilBgmdhH084b/edit" target="_blank">
+                        Become an Uncle
+                    </a>
                 </div>
                 
                 <div class="feature-item">
@@ -355,7 +393,11 @@
                     <h3 class="feature-title">Creativity</h3>
                     <p class="feature-text">
                         Explore creative expressions, innovative ideas, and cultural exchanges that inspire and transform.
+                        Interested schools, NGO/NPO organisations, Galleries, and Museums in the network. 
                     </p>
+                    <a class="cta-button" style="margin-top: 15px; display: inline-block;" href="https://docs.google.com/document/d/11ZbTUwPkahByHy8DxzpLr71jftZ9uFu_/edit" target="_blank">
+                        Nephews & Nieces
+                    </a>
                 </div>
             </section>
 
@@ -388,5 +430,11 @@
             }));
         });
     </script>
+    <footer class="site-footer">
+        <hr class="footer-line">
+        <div class="footer-text">
+            Supported by <a href="https://framerframed.nl" target="_blank">Framer Framed</a>.
+        </div>
+    </footer>
 </body>
 </html>
